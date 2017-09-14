@@ -6,10 +6,37 @@
     <script src="https://cdn.bootcss.com/react/15.4.2/react.min.js"></script>
     <script src="https://cdn.bootcss.com/react/15.4.2/react-dom.min.js"></script>
     <script src="https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js"></script>
+    <script src="lib/asyncload.js"></script>
+    <script>
+        function startPage() {
+            asynLoadScript("game/fileManager.js", onFileManagerLoaded );
+        }
+        function onFileManagerLoaded(){
+            needTrace = true;
+            var needScripts = [ "lib/events.js", "lib/canvasswc.js",  "game/Assets.js", "reactjs/main.js"];
+            var needcsses = ["canvasCss/canvasCss.css"];
+            new FileManager( needScripts, needcsses ).load( onJSFilesLoaded );
+        }
+        function onJSFilesLoaded(){
+            gameLoad();
+        }
+    </script>
+    <style>
+        .loadingDiv{
+            position: fixed;
+            width: 400px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            margin-top: -150px;
+            margin-left: -200px;
+            background-image: url("img/loading.gif");
+        }
+    </style>
 </head>
 
-<body><div id="main"></div>
-    <script src="reactjs/main.js" type="text/babel"></script>
-    <script src="canvasjs/card.js" type="text/babel"></script>
+<body onLoad="startPage()" bgcolor="#FFF"><div id="main"  class="loadingDiv"></div>
+    <script src="reactjs/gamebabel.js" type="text/babel"></script>
+    <script src="reactjs/card.js" type="text/babel"></script>
 </body>
 </html>

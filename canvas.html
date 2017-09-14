@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>canvasGame</title>
+<title>CanvasGame</title>
     <script src="lib/asyncload.js"></script>
     <script>
         function startPage() {
@@ -10,7 +10,7 @@
         }
         function onFileManagerLoaded(){
             needTrace = true;
-            var needScripts = [ "lib/events.js", "lib/canvasswc.js",  "game/Assets.js", "canvasjs/main.js",];
+            var needScripts = [ "lib/events.js", "lib/canvasswc.js",  "game/Assets.js", "canvasjs/main.js", "lib/geom.js"];
             var needcsses = ["canvasCss/canvasCss.css"];
             new FileManager( needScripts, needcsses ).load( onJSFilesLoaded );
         }
