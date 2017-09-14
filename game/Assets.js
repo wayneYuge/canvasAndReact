@@ -1,12 +1,19 @@
 function Assets(){
     this.textureLoaded = assetsTextureLoaded;
-
-    this.textureBomboRing = new GameTexture( "img/bombo_ring.png", this.textureLoaded ).load();
-    this.bg = new GameTexture( "img/background.jpg", this.textureLoaded).load();
-    this.textureTripleSceneCropped = new GameTexture( "img/tripleSceneCroppedEmpty.png",this.textureLoaded ).load();
-    this.logoIcon = new GameTexture( "img/logo.png",this.textureLoaded ).load();
-    this.buttons = new GameTexture( "img/buttons_pariplay_triplebonus_matchmania2.png",this.textureLoaded ).load();
-    this.balls = new GameTexture( "img/tripleBalls2.png",this.textureLoaded ).load();
+    this.onLoadCallBack;
+    this.setAssetsItems = function( itemObj ){
+        for( var ob in itemObj ){
+            this[ob] = new GameTexture( itemObj[ob], this.textureLoaded );
+        }
+    }
+    this.load = function( callback ){
+        this.onLoadCallBack = callback;
+        for( var txName in this ){
+            if( this[txName] instanceof GameTexture ){
+                this[txName].load();
+            }
+        }
+    }
 }
 
 AssetsEvent = function(){}
@@ -37,13 +44,12 @@ function GameTexture( url, callback ){
 }
 
 function assetsTextureLoaded(e){
-    trace( "textrueLoaded-getTimer:" + getTimer() );
-    trace( "textureUrl:" + e.path[0].src );
+    trace( "getTextrue:" + this.url + " " + getTimer() );
     var assets = Assets.assets();
     for( var txName in assets ){
-        if( assets[o] instanceof GameTexture ){
-            if( !assets[o].isloaded )return;
+        if( assets[txName] instanceof GameTexture ){
+            if( !assets[txName].isloaded )return;
         }
     }
-    Facade.getInstance().dispatchEvent( new Event( AssetsEvent.ALL_TEXTURE_LOADED ) );
+    if( assets.onLoadCallBack )assets.onLoadCallBack();
 }

@@ -3,8 +3,35 @@
 <head>
 <meta charset="utf-8">
 <title>canvasGame</title>
+    <script src="lib/asyncload.js"></script>
+    <script>
+        function startPage() {
+            asynLoadScript("game/fileManager.js", onFileManagerLoaded );
+        }
+        function onFileManagerLoaded(){
+            needTrace = true;
+            var needScripts = [ "lib/events.js", "lib/canvasswc.js",  "game/Assets.js", "canvasjs/main.js",];
+            var needcsses = ["canvasCss/canvasCss.css"];
+            new FileManager( needScripts, needcsses ).load( onJSFilesLoaded );
+        }
+        function onJSFilesLoaded(){
+            gameLoad();
+        }
+    </script>
+    <style>
+        .loadingDiv{
+            position: fixed;
+            width: 400px;
+            height: 300px;
+            top: 50%;
+            left: 50%;
+            margin-top: -150px;
+            margin-left: -200px;
+            background-image: url("img/loading.gif");
+        }
+    </style>
 </head>
 
-<body>
+<body onLoad="startPage()" bgcolor="#FFF"><div id="main"  class="loadingDiv"></div>
 </body>
 </html>
