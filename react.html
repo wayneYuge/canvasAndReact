@@ -13,7 +13,7 @@
         }
         function onFileManagerLoaded(){
             needTrace = true;
-            var needScripts = [ "lib/events.js", "lib/canvasswc.js",  "game/Assets.js", "reactjs/main.js"];
+            var needScripts = [ "lib/events.js", "lib/canvasswc.js",  "game/Assets.js", "reactjs/main.js", "game/events/GameEvent.js" ];
             var needcsses = ["canvasCss/canvasCss.css"];
             new FileManager( needScripts, needcsses ).load( onJSFilesLoaded );
         }

@@ -44,23 +44,8 @@ function bond(){//game main class
 
 function SuperBond(){
     this.layer1;
-    this.setStage = function(){
-        var gameStage = new Stage("main");
-        $dom("main").className = "canvasDiv";
-        this.layer1 = new Layer( 1024, 768, 1000/60 );
-        this.layer1.align = "center";
-        this.layer1.entity.className = "layerDiv";
-        gameStage.addChild( this.layer1 );
-        window.onresize = this.onResize.bind(this);
-        this.onResize();
-    }
-    this.onResize = function(){
-        var wd = $dom("main").offsetWidth;
-        var ht = $dom("main").offsetHeight;
-        var scale = Math.min( wd / 1024, ht / 768 );
-        this.layer1.width = 1024 * scale;
-        this.layer1.height = 768 * scale;
-    }
+    this.setStage = reactStage;
+    $dom("main").className = "canvasDiv";
     this.setStage();
 
     this.addLogo = function(){
@@ -69,9 +54,8 @@ function SuperBond(){
         var logo = new Bitmap( new BitmapData( logoTexture, rect ) );
         logo.x = 880;
         logo.y = 550;
-        logo.smoothing = true;
-        logo.scaleX = logo.scaleY = 0.2;
-        this.layer1.addChild( logo );
     }
     this.addLogo();
+
+    trace( new GameEvent( "hehe" ) );
 }

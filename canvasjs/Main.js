@@ -65,12 +65,11 @@ function SuperBond(){
 
     this.addLogo = function(){
         var logoTexture = Assets.assets().logoIcon;
-        var rect = { x:0,y:0,width:logoTexture.texture.width,height:logoTexture.texture.height };
+        var rect = new Rectangle( 0, 0, logoTexture.texture.width,logoTexture.texture.height) ;
         var logo = new Bitmap( new BitmapData( logoTexture, rect ) );
         logo.x = 880;
         logo.y = 550;
         logo.smoothing = true;
-        logo.scaleX = logo.scaleY = 0.2;
         this.layer1.addChild( logo );
     }
     this.addLogo();
