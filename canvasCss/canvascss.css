@@ -8,9 +8,3 @@ div{
     left: 0px;
     background-color: black;
 }
-.layerDiv{
-    position:absolute;
-    background-image: url("../img/background.jpg");
-    background-position: top center;
-    background-size: auto 100%;
-}

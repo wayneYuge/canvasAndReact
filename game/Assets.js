@@ -25,7 +25,7 @@ Assets.assets = function(){
 }
 
 function GameTexture( url, callback ){
-    this.tamp = Texture; this.tamp(); delete this.tamp;
+    Texture.call( this );
     this.url = url;
     this.callback = callback;
     this.isloaded = false;
@@ -42,6 +42,7 @@ function GameTexture( url, callback ){
         return this;
     }
 }
+GameTexture.prototype = new Texture;
 
 function assetsTextureLoaded(e){
     trace( "getTextrue:" + this.url + " " + getTimer() );
