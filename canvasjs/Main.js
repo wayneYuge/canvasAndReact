@@ -2,7 +2,7 @@ function gameLoad(){
     var assetDictionary = {
         bomboRing : "img/bombo_ring.png",
         bg : "img/background.jpg",
-        tripleSceneCropped : "img/tripleSceneCroppedEmpty.png",
+        textureTripleSceneCropped : "img/tripleSceneCroppedEmpty.png",
         logoIcon : "img/logo.png",
         buttons : "img/buttons_pariplay_triplebonus_matchmania2.png",
         balls : "img/tripleBalls2.png"
@@ -59,7 +59,7 @@ function bond(){//game main class
     this.addFixedItems();
 
     this.lotteryBalls;
-    //this.rewardBar;
+    this.rewardBar;
     //this.cards;
     this.bottomBar;
     //this.gameBalls;
@@ -71,8 +71,8 @@ function bond(){//game main class
         this.lotteryBalls =  new LotteryBall;
         this.layer1.addChild( this.lotteryBalls.entity );
 
-        //this.rewardBar = new RewardBar;
-        //addChild( this.rewardBar.entity );
+        this.rewardBar = new RewardBar;
+        this.layer1.addChild( this.rewardBar.entity );
         //
         //addCards();
         this.addBottom();
@@ -102,7 +102,7 @@ bond.prototype.addBottom = function(){
     this.layer1.addChild( bottomBar.entity );
 }
 bond.prototype.onChangeBet = function(event){
-    trace( "bet" )
+    trace( event.info )
     //if( needClearCard )clearPlayStatus();
     //GameCard.currentBetChange( !event.info );
     //rewardBar.changePrices( GameCard.currentBetCount );

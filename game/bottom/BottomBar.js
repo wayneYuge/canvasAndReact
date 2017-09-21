@@ -15,6 +15,34 @@ function BottomBar(){
     this.winNumber = this.addText( "", 315, 18, 80, 30 );
     this.coinsNumber = this.addText( "", 488, 30, 120, 25 );
 
+    this._money;
+    Object.defineProperty( this, "money", {
+        get: function(){
+            return this._money;
+        },
+        set: function(value){
+            _money = value;
+            this.coinsNumber.text = "" + value;
+            BottomSettings.setOriginMoney( value )
+        }
+    });
+
+    this._bet;
+    Object.defineProperty( this, "bet", {
+        set: function(){
+            this._bet = value;
+            this.betNumber.text = "" + value;
+        }
+    });
+
+    this._win;
+    Object.defineProperty( this, "win", {
+        set: function () {
+            this._win = value;
+            this.winNumber.text = "" + ( value ? value : "" );
+        }
+    });
+
     this.y = 695;
     this.money = BottomSettings.getOriginMoney();
 }
@@ -54,4 +82,36 @@ BottomBar.prototype.addText = function( text, x, y, textWidth, size ){
     var tx = GameText.createText( textWidth, GameText.getBottomBarCss(), x, y, text, true, size );
     this.addChild( tx );
     return tx;
+}
+BottomBar.prototype.enablePlayButtons = function( enbled ) {
+    playButton.enabled = enbled;
+    leftBetButton.enabled = enbled;
+    rightBetButton.enabled = enbled;
+    autoButton.enabled = enbled;
+}
+BottomBar.prototype.showExtraAndExitButton = function(){
+    if( contains( playButton.entity ) )removeChild( playButton.entity );
+    addChild( buyExtraButton.entity );
+
+    if( contains( autoButton.entity ) )removeChild( autoButton.entity );
+    addChild( exitButton.entity );
+}
+BottomBar.prototype.showPlayAndAutoButton = function(){
+    if( contains( buyExtraButton.entity ) )removeChild( buyExtraButton.entity );
+    addChild( playButton.entity );
+
+    if( contains( exitButton.entity ) )removeChild( exitButton.entity );
+    addChild( autoButton.entity );
+}
+BottomBar.prototype.addMoneyAndClear = function(){
+    this.money += _win;
+    this.win = 0;
+}
+BottomBar.prototype.startAuto = function(){
+    if( this.autoButton && this.contains( this.autoButton.entity ) )this.removeChild( this.autoButton.entity );
+    this.addChild( this.stopButton.entity );
+    this.dispatchEvent( new BottomBarEvent( BottomBarEvent.BOTTOM_PLAY ) );
+}
+BottomBar.prototype.autoGiveExtra = function(){
+    this.dispatchEvent( new BottomBarEvent( BottomBarEvent.BOTTOM_EXTRA ) );
 }

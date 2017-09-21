@@ -10,7 +10,10 @@
         }
         function onFileManagerLoaded(){
             needTrace = true;
-            var needScripts = [ "lib/events.js", "lib/geom.js", "canvasjs/main.js", "lib/display.js", "game/Assets.js", "game/GameEvent.js", "game/GameUtil.js", "canvasjs/ModelDisplay.js", "game/GameButton.js", "game/balls/LotteryBalls.js", "game/bottom/BottomBar.js", "game/bottom/ButtonInfo.js", "game/GameText.js" ];
+            var needScripts = [ "lib/events.js", "lib/geom.js", "canvasjs/main.js", "lib/display.js", "game/Assets.js", "game/GameEvent.js", "game/GameUtil.js",
+                "canvasjs/ModelDisplay.js", "game/GameButton.js", "game/balls/LotteryBalls.js", "game/bottom/BottomBar.js", "game/bottom/ButtonInfo.js", "game/GameText.js",
+                "game/reward/RewardBar.js", "game/reward/RewardItem.js", "game/reward/RewardItemFactory.js", "game/reward/RewardObject.js", "game/reward/RewardType.js",
+            ];
             var needcsses = ["canvasCss/canvasCss.css"];
             new FileManager( needScripts, needcsses ).load( onJSFilesLoaded, true );
         }
