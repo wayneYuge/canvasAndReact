@@ -36,7 +36,6 @@ function GameButton( texture, position ){
 
     this.enabled = true;
     this.entity.onmousedown = this.onDown.bind(this);
-    this.buttonMode = true;
 }
 GameButton.prototype = new ModelSprite;
 GameButton.prototype.onDown = function( event ){

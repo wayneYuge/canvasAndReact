@@ -21,7 +21,7 @@ function BottomBar(){
             return this._money;
         },
         set: function(value){
-            _money = value;
+            this._money = value;
             this.coinsNumber.text = "" + value;
             BottomSettings.setOriginMoney( value )
         }
@@ -29,15 +29,15 @@ function BottomBar(){
 
     this._bet;
     Object.defineProperty( this, "bet", {
-        set: function(){
+        set: function( value ){
             this._bet = value;
             this.betNumber.text = "" + value;
         }
     });
 
-    this._win;
+    this._win = 0;
     Object.defineProperty( this, "win", {
-        set: function () {
+        set: function ( value ) {
             this._win = value;
             this.winNumber.text = "" + ( value ? value : "" );
         }
@@ -104,7 +104,7 @@ BottomBar.prototype.showPlayAndAutoButton = function(){
     addChild( autoButton.entity );
 }
 BottomBar.prototype.addMoneyAndClear = function(){
-    this.money += _win;
+    this.money = parseInt( this.money ) + this._win;
     this.win = 0;
 }
 BottomBar.prototype.startAuto = function(){

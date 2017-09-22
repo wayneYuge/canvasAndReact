@@ -41,6 +41,18 @@ ModelShape.prototype = new ModelDisplayObject;
 function ModelSprite(){
     ModelDisplayObject.call(this);
     this.entity = new Sprite;
+
+    Object.defineProperty( this, "mouseChildren", {
+        set: function( value ){
+            this.entity.mouseChildren = value;
+        }
+    });
+
+    Object.defineProperty( this, "mouseEnabled", {
+        set: function( value ){
+            this.entity.mouseEnabled = value;
+        }
+    })
 }
 ModelSprite.prototype = new ModelDisplayObject;
 ModelSprite.prototype.contains = function( child ){

@@ -19,22 +19,22 @@ function RewardBar(){
             return this._active;
         },
         set: function( value ){
-            if( _active == value )return;
-            _active = value;
+            if( this._active == value )return;
+            this._active = value;
             if( value )	{
-                rewards.forEach( function( a,b,c ){ a.active = true; } );
-                entity.addEventListener( Event.ENTER_FRAME, onFrame );
+                this.rewards.forEach( function( a,b,c ){ a.active = true; } );
+                this.entity.onFrame = this.onFrame.bind(this);
             }
             else{
-                rewards.forEach( function( a,b,c ){ a.active = false; } );
-                prices.forEach( function( a,b,c ){
+                this.rewards.forEach( function( a,b,c ){ a.active = false; } );
+                this.prices.forEach( function( a,b,c ){
                     var tf = a.defaultTextFormat;
                     if( tf.color == 0xFFFFFF )return;
                     tf.color = 0xFFFFFF;
                     a.defaultTextFormat = tf;
                     a.text = a.text;
                 } );
-                entity.removeEventListener( Event.ENTER_FRAME, onFrame );
+                this.entity.onFrame = null;
             }
         }
     });

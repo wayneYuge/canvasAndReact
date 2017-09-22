@@ -5,9 +5,9 @@ CardAssetInfo.getCardBackgrounds = function(){
     var cardWidth = 364;
     var cardHeight = 207;
     for( var i = 0; i < 11; i++ ){
-        cardBackgrounds[i] = new Rectangle( 8 + i % 3 * 381, 144 + int( i / 3 ) * 224, cardWidth, cardHeight );
+        cardBackgrounds[i] = new Rectangle( 8 + i % 3 * 381, 144 + Math.floor( i / 3 ) * 224, cardWidth, cardHeight );
     }
-    cardBackgrounds[11] = new Rectangle( 8 + 12 % 3 * 381, 144 + int( 12 / 3 ) * 224, cardWidth, cardHeight );
+    cardBackgrounds[11] = new Rectangle( 8 + 12 % 3 * 381, 144 + Math.floor( 12 / 3 ) * 224, cardWidth, cardHeight );
     var orderArray = [9,6,7,11,3,5,0,4,1,2,8,10];
     var orderBGs = [];
     for( i = 0; i < orderArray.length; i++ )orderBGs[i] = cardBackgrounds[ orderArray[i] ];
@@ -41,4 +41,21 @@ CardRewadItem.prototype.getIcon = function(){
     tx.x = position.x;
     tx.y = position.y;
     return tx;
+}
+
+function GameGridStatus(){}
+GameGridStatus.NORMAL = 0;
+GameGridStatus.CROSS = 1;
+GameGridStatus.RED = 2;
+GameGridStatus.BLINK = 3;
+
+function GameCardInfo(){}
+GameCardInfo.getCards = function(){
+    var cards = [];
+    for (var i = 0; i < 4; i++){
+        cards[i] = new GameCard;
+        cards[i].x = 25 + ( i & 1 ) * 615;
+        cards[i].y = 117 + ( i >> 1 ) * 213;
+    }
+    return cards;
 }
