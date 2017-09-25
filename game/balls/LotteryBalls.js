@@ -18,7 +18,7 @@ function LotteryBall(){
                 case LotteryStatus.EXTRA:
                     this.removeChildren();
                     if( !this.extraBalls )this.extraBalls = new GameExtra;
-                    addChild( this.extraBalls.entity );
+                    this.addChild( this.extraBalls.entity );
                     break;
             }
         }
@@ -43,3 +43,20 @@ LotteryBall.prototype.addRoller = function(){
 function LotteryStatus(){}
 LotteryStatus.ROLLER = 0;
 LotteryStatus.EXTRA = 1;
+
+function GameExtra(){
+    ModelSprite.call(this);
+    this.normalExtra = new Bitmap( new BitmapData( Assets.assets().balls, new Rectangle( 3093, 2370, 182, 182 ) ) );
+    this.normalExtra.x = 5;
+    this.normalExtra.y = 5;
+
+    this.extraBox = new Bitmap( new BitmapData( Assets.assets().textureTripleSceneCropped, new Rectangle( 1148, 136, 172, 212 ) ) );
+    this.extraBox.x = 10;
+    this.extraBox.y = -195;
+    this.addChild( this.extraBox );
+    this.addChild( this.normalExtra );
+
+    this.extraText = GameText.createText( 160, GameText.getExtraCss(), 15, 70, "FREE", true );
+    this.addChild( this.extraText );
+}
+GameExtra.prototype = new ModelSprite;

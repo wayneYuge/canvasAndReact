@@ -10,18 +10,19 @@ GridBG.prototype.drawGrid = function( color ){
 }
 GridBG.prototype.drawCross = function(){
     this.entity.graphics.beginFill( 0xFF0000 );
-    this.entity.graphics.moveTo( 11, 14 );
-    this.entity.graphics.lineTo( 16,  8 );
-    this.entity.graphics.lineTo( 34, 23 );
-    this.entity.graphics.lineTo( 51,  8 );
-    this.entity.graphics.lineTo( 57, 14 );
-    this.entity.graphics.lineTo( 40, 28 );
-    this.entity.graphics.lineTo( 57, 42 );
-    this.entity.graphics.lineTo( 51, 49 );
-    this.entity.graphics.lineTo( 34, 34 );
-    this.entity.graphics.lineTo( 16, 50 );
-    this.entity.graphics.lineTo( 11, 44 );
-    this.entity.graphics.lineTo( 28, 28 );
-    this.entity.graphics.lineTo( 11, 14 );
+    //this.entity.graphics.moveTo( 11, 14 );
+    //this.entity.graphics.lineTo( 16,  8 );
+    //this.entity.graphics.lineTo( 34, 23 );
+    //this.entity.graphics.lineTo( 51,  8 );
+    //this.entity.graphics.lineTo( 57, 14 );
+    //this.entity.graphics.lineTo( 40, 28 );
+    //this.entity.graphics.lineTo( 57, 42 );
+    //this.entity.graphics.lineTo( 51, 49 );
+    //this.entity.graphics.lineTo( 34, 34 );
+    //this.entity.graphics.lineTo( 16, 50 );
+    //this.entity.graphics.lineTo( 11, 44 );
+    //this.entity.graphics.lineTo( 28, 28 );
+    //this.entity.graphics.lineTo( 11, 14 );
+    this.entity.graphics.drawRect( 10,10, GameCardGrid.GridWidth - 20, GameCardGrid.GridHeight - 20 );
     this.entity.graphics.endFill();
 }

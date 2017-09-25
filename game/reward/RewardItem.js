@@ -16,13 +16,13 @@ function RewardItem( bit1, bit2, mc ){
         },
         set: function(value){
             if( value == "blink" ){
-                _status = "blink";
-                if( this.contains( normalBg ) )this.removeChild( normalBg );
-                this.addChildAt( blinkBg, 0 );
+                this._status = "blink";
+                if( this.contains( this.normalBg ) )this.removeChild( this.normalBg );
+                this.addChildAt( this.blinkBg, 0 );
             }
             else{
-                _status = "normal";
-                if( this.blinkBg && this.contains( blinkBg ) )this.removeChild( this.blinkBg );
+                this._status = "normal";
+                if( this.blinkBg && this.contains( this.blinkBg ) )this.removeChild( this.blinkBg );
                 this.addChildAt( this.normalBg, 0 );
             }
         }
@@ -42,7 +42,7 @@ function RewardItem( bit1, bit2, mc ){
             if( value ){
                 this.intervalIndex = 0;
                 this.blinkList = [];
-                if( !this.blinkLayer )this.blinkLayer = new Sprite;
+                if( !this.blinkLayer )this.blinkLayer = new Shape();
                 this.addChild( this.blinkLayer );
             }
             else{
@@ -50,7 +50,7 @@ function RewardItem( bit1, bit2, mc ){
                     this.blinkLayer.graphics.clear();
                     this.removeChild( this.blinkLayer );
                 }
-                status = "normal"
+                this.status = "normal"
             }
         }
     });
@@ -58,14 +58,18 @@ function RewardItem( bit1, bit2, mc ){
 RewardItem.prototype = new ModelSprite;
 RewardItem.prototype.freeFrames = 30;
 RewardItem.prototype.onFrame = function(event){
-    intervalIndex++;
+    this.intervalIndex++;
     if( this.intervalIndex % this.freeFrames )return;
     if( this.intervalIndex / this.freeFrames & 1 )this.blinkLayer.graphics.clear();
     else{
         var rewardWidth = ( RewardItemFactory.rewardWidth - 2 ) / 5;
         var rewardHeight = ( RewardItemFactory.rewardHeight - 2 ) / 3;
         this.blinkLayer.graphics.beginFill( 0xFFFF00 );
-        for( var i = 0; i < this.blinkList.length; i++ )this.blinkLayer.graphics.drawRect( int( this.blinkList[i] / 3 ) * rewardWidth + 1, this.blinkList[i] % 3 * rewardHeight + 1, rewardWidth - 0.5,rewardHeight - 0.5 );
+        for( var i = 0; i < this.blinkList.length; i++ )this.blinkLayer.graphics.drawRect( Math.floor( this.blinkList[i] / 3 ) * rewardWidth + 1, this.blinkList[i] % 3 * rewardHeight + 1, rewardWidth - 0.5,rewardHeight - 0.5 );
         this.blinkLayer.graphics.endFill();
     }
+}
+RewardItem.prototype.addBlickAt = function( index ){
+    if( this.blinkList.indexOf( index ) >= 0 )return;
+    this.blinkList.push( index );
 }

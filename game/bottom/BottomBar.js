@@ -84,24 +84,24 @@ BottomBar.prototype.addText = function( text, x, y, textWidth, size ){
     return tx;
 }
 BottomBar.prototype.enablePlayButtons = function( enbled ) {
-    playButton.enabled = enbled;
-    leftBetButton.enabled = enbled;
-    rightBetButton.enabled = enbled;
-    autoButton.enabled = enbled;
+    this.playButton.enabled = enbled;
+    this.leftBetButton.enabled = enbled;
+    this.rightBetButton.enabled = enbled;
+    this.autoButton.enabled = enbled;
 }
 BottomBar.prototype.showExtraAndExitButton = function(){
-    if( contains( playButton.entity ) )removeChild( playButton.entity );
-    addChild( buyExtraButton.entity );
+    if( this.contains( this.playButton.entity ) )this.removeChild( this.playButton.entity );
+    this.addChild( this.buyExtraButton.entity );
 
-    if( contains( autoButton.entity ) )removeChild( autoButton.entity );
-    addChild( exitButton.entity );
+    if( this.contains( this.autoButton.entity ) )this.removeChild( this.autoButton.entity );
+    this.addChild( this.exitButton.entity );
 }
 BottomBar.prototype.showPlayAndAutoButton = function(){
-    if( contains( buyExtraButton.entity ) )removeChild( buyExtraButton.entity );
-    addChild( playButton.entity );
+    if( this.contains( this.buyExtraButton.entity ) )this.removeChild( this.buyExtraButton.entity );
+    this.addChild( this.playButton.entity );
 
-    if( contains( exitButton.entity ) )removeChild( exitButton.entity );
-    addChild( autoButton.entity );
+    if( this.contains( this.exitButton.entity ) )this.removeChild( this.exitButton.entity );
+    this.addChild( this.autoButton.entity );
 }
 BottomBar.prototype.addMoneyAndClear = function(){
     this.money = parseInt( this.money ) + this._win;

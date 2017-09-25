@@ -8,7 +8,7 @@ function RewardBar(){
     }
     this.rewardsType = new RewardTypes;
     this.rewardsItemIndex = new RewardItemIndex;
-    this.rewardConlict = new RewardConflict( this.rewardsType );
+    this.rewardConflict = new RewardConflict( this.rewardsType );
 
     this.mouseChildren = false;
     this.mouseEnabled = false;
@@ -51,28 +51,28 @@ RewardBar.prototype.changePrices = function( betCount ){
 }
 RewardBar.prototype.getReward = function( numberList ){
     var rewardObj = new RewardObject;
-    rewardObj.checkReward( rewardsType, numberList );
-    rewardObj.checkConflict( rewardConflict );
+    rewardObj.checkReward( this.rewardsType, numberList );
+    rewardObj.checkConflict( this.rewardConflict );
     return rewardObj;
 }
 RewardBar.prototype.showGotReward = function( gotRewardItem ){
-    var itemIndex = rewardsItemIndex[gotRewardItem];
-    var tf = prices[itemIndex].defaultTextFormat;
+    var itemIndex = this.rewardsItemIndex[gotRewardItem];
+    var tf = this.prices[itemIndex].defaultTextFormat;
     tf.color = 0xFF0000;
-    prices[itemIndex].defaultTextFormat = tf;
-    prices[itemIndex].text = prices[itemIndex].text;
-    rewards[itemIndex].status = "blink";
+    this.prices[itemIndex].defaultTextFormat = tf;
+    this.prices[itemIndex].text = this.prices[itemIndex].text;
+    this.rewards[itemIndex].status = "blink";
 }
 RewardBar.prototype.getRewardsItemArray = function(gotRewardItem){
-    return rewardsType[gotRewardItem];
+    return this.rewardsType[gotRewardItem];
 }
 RewardBar.prototype.showGotLeftReward = function( ob, number ){
-    rewards[rewardsItemIndex[ob]].addBlickAt( number );
+    this.rewards[this.rewardsItemIndex[ob]].addBlickAt( number );
 }
 RewardBar.prototype.onFrame = function(event){
-    rewards.forEach( function(a,b,c){ a.onFrame(null) } );
+    this.rewards.forEach( function(a,b,c){ a.onFrame(null) } );
 }
 RewardBar.prototype.getWinPricae = function(gotRewardItem){
-    var itemIndex = rewardsItemIndex[gotRewardItem];
+    var itemIndex = this.rewardsItemIndex[gotRewardItem];
     return this.priceList[itemIndex];
 }

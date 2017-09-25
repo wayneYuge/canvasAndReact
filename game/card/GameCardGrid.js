@@ -64,7 +64,7 @@ GameCardGrid.prototype.setNormalStatus = function( isRed ){
     isRed = isRed == true;
     this.drawGrid( isRed ? 0xFF0000 :0xFFFFFF );
     this.resetTextColor( 0x0 );
-    if( this.entity.onFrame )this.entity.onFrame = this.onFrame.bind(this);
+    if( this.entity.onFrame )this.entity.onFrame = null;
 }
 
 GameCardGrid.prototype.resetTextColor = function( color ){
