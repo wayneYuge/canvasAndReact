@@ -1,7 +1,7 @@
 function Ball(texture, rect){
     Bitmap.call(this, new BitmapData( texture, rect ));
 }
-Ball.prototype = new Bitmap;
+Ball.extend( Bitmap );
 Ball.prototype.setTargetPositions = function(pt){
     this.path = pt.concat();
     this.toNextPoint();

@@ -37,7 +37,7 @@ function GameButton( texture, position ){
     this.enabled = true;
     this.entity.onmousedown = this.onDown.bind(this);
 }
-GameButton.prototype = new ModelSprite;
+GameButton.extend( ModelSprite );
 GameButton.prototype.onDown = function( event ){
     this.removeChildren();
     this.addChild( this.down );

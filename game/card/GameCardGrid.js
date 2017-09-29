@@ -50,7 +50,7 @@ function GameCardGrid(){
     });
     this.status = GameGridStatus.NORMAL;
 }
-GameCardGrid.prototype = new ModelSprite;
+GameCardGrid.extend( ModelSprite );
 GameCardGrid.GridWidth = 69;
 GameCardGrid.GridHeight = 56;
 GameCardGrid.prototype.freeFrame = 10;

@@ -42,7 +42,7 @@ function GameTexture( url, callback ){
         return this;
     }
 }
-GameTexture.prototype = new Texture;
+GameTexture.extend( Texture );
 
 function assetsTextureLoaded(e){
     trace( "getTextrue:" + this.url + " " + getTimer() );

@@ -28,7 +28,7 @@ function LotteryBall(){
     this.y = 260;
     this.status = LotteryStatus.ROLLER;
 }
-LotteryBall.prototype = new ModelSprite;
+LotteryBall.extend( ModelSprite );
 LotteryBall.prototype.addRoller = function(){
     var pointVector = [];
     for( var i = 0; i < 27; i++ ){
@@ -59,4 +59,4 @@ function GameExtra(){
     this.extraText = GameText.createText( 160, GameText.getExtraCss(), 15, 70, "FREE", true );
     this.addChild( this.extraText );
 }
-GameExtra.prototype = new ModelSprite;
+GameExtra.extend( ModelSprite );

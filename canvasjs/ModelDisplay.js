@@ -30,13 +30,13 @@ function ModelDisplayObject(){
         }
     });
 }
-ModelDisplayObject.prototype = new EventDispatcher;
+ModelDisplayObject.extend( EventDispatcher );
 
 function ModelShape(){
     ModelDisplayObject.call(this);
     this.entity = new Shape;
 }
-ModelShape.prototype = new ModelDisplayObject;
+ModelShape.extend( ModelDisplayObject );
 
 function ModelSprite(){
     ModelDisplayObject.call(this);
@@ -54,7 +54,7 @@ function ModelSprite(){
         }
     })
 }
-ModelSprite.prototype = new ModelDisplayObject;
+ModelSprite.extend( ModelDisplayObject );
 ModelSprite.prototype.contains = function( child ){
     return this.entity.contains( child );
 }

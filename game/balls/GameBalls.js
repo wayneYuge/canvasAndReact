@@ -9,7 +9,7 @@ function GameBalls(){
     this.movingBallLayer = new Sprite;
     this.addChild( this.movingBallLayer );
 }
-GameBalls.prototype = new ModelSprite;
+GameBalls.extend( ModelSprite );
 GameBalls.ballSize = new Point( 45, 45 );
 GameBalls.startPosition = new Point( 490, 450 );
 GameBalls.extraPosition = new Point( 490, 220 );

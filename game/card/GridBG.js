@@ -1,7 +1,7 @@
 function GridBG(){
     ModelShape.call(this);
 }
-GridBG.prototype = new ModelShape;
+GridBG.extend( ModelShape );
 GridBG.prototype.drawGrid = function( color ){
     this.entity.graphics.clear();
     this.entity.graphics.beginFill( color );

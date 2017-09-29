@@ -46,7 +46,7 @@ function BottomBar(){
     this.y = 695;
     this.money = BottomSettings.getOriginMoney();
 }
-BottomBar.prototype = new ModelSprite;
+BottomBar.extend( ModelSprite );
 BottomBar.prototype.addButtonAt = function( button, onClickCallBack, addToStage ){
     if( onClickCallBack )button.entity.onclick = onClickCallBack;
     if( addToStage == true || addToStage == null )this.addChild( button.entity );

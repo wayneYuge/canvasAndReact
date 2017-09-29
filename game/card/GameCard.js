@@ -44,7 +44,7 @@ function GameCard(){
 
     this.enabled = true;
 }
-GameCard.prototype = new ModelSprite;
+GameCard.extend( ModelSprite );
 GameCard.currentBg = 0;
 GameCard.betList = [1,2,3,4,5,6,8,10,12,15,20];
 Object.defineProperty( GameCard, "currentBetCount", {

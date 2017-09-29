@@ -55,7 +55,7 @@ function RewardItem( bit1, bit2, mc ){
         }
     });
 }
-RewardItem.prototype = new ModelSprite;
+RewardItem.extend( ModelSprite );
 RewardItem.prototype.freeFrames = 30;
 RewardItem.prototype.onFrame = function(event){
     this.intervalIndex++;

@@ -41,7 +41,7 @@ function RewardBar(){
 
     this.changePrices( 1 );
 }
-RewardBar.prototype = new ModelSprite;
+RewardBar.extend( ModelSprite );
 RewardBar.prototype.priceList = [1500,600,300,200,100,100,40,40,10,8,3,3];
 RewardBar.prototype.changePrices = function( betCount ){
     for( var i = 0; i < this.prices.length; i++ ){

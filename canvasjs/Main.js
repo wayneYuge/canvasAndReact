@@ -63,7 +63,7 @@ function bond(){//game main class
 
     this.initialize();
 }
-bond.prototype = new SuperBond;
+bond.extend( SuperBond );
 bond.prototype.initialize = function(){
     this.lotteryBalls =  new LotteryBall;
     this.layer1.addChild( this.lotteryBalls.entity );
