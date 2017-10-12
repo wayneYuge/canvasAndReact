@@ -1,5 +1,4 @@
 var enterFrame;
-var currentStage = 1;
 var stageNumber;
 var sciene;
 function gameBegin(){
@@ -22,13 +21,13 @@ function SuperBond(){
 	this.layer1;
 }
 SuperBond.prototype.setStage = function(){
-	var gameStage = new Stage("main");
+	this.stage = new Stage("main");
 	$dom("main").className = "canvasDiv";
 	this.layer1 = new Layer( 550, 550, 1000/60 );
 	this.layer1.align = "center";
 	this.layer1.entity.style.position = "absolute";
 	this.layer1.entity.style.backgroundColor = rgbString( 0x0 );
-	gameStage.addChild( this.layer1 );
+	this.stage.addChild( this.layer1 );
 	window.onresize = this.onResize.bind(this);
 	this.onResize();
 }
@@ -57,50 +56,59 @@ bond.prototype.initialize = function(){
 	this.startPage.y = 500;
 	this.layer1.addChild( this.startPage );
 
+	this.bg = new Shape;
+	this.bg.graphics.beginFill(0);
+	this.bg.graphics.drawRect( 0, 0, 550, 550 );
+	this.layer1.addChildAt( this.bg, 0 );
+
 	TweenLite.to( this.startPage, 2, { y : 0, ease : Linear.easeNone, onComplete : this.showTank.bind(this) } )
 }
 bond.prototype.showTank = function(){
 	this.userTank = new UserTank();
 	this.userTank.x = 160;
 	this.userTank.y = 270;
-	this.layer1.addChild( this.userTank );
-	//document.onkeydown = keyDown;
+	//this.layer1.addChild( this.userTank );
+	document.onkeydown = this.keyDown.bind(this);
 }
-
-function keyDown(e) {
-	var keycode = e.which;
-	if( keycode == 87 || keycode == 38 )userTank.y = 270;
-	else if( keycode == 83 || keycode == 40 )userTank.y = 317;
-	else if( keycode == 32 || keycode == 13 )gotoNextScene();
+bond.prototype.keyDown = function(e) {
+	var keycode = e.keyCode;
+	if( keycode == 87 || keycode == 38 )this.userTank.y = 270;
+	else if( keycode == 83 || keycode == 40 )this.userTank.y = 317;
+	else if( keycode == 32 || keycode == 13 )this.gotoNextScene();
 }
+bond.prototype.gotoNextScene = function(){
+	this.layer1.removeChildren();
 
-function gotoNextScene(){
-	stage.removeChildren();
-	document.onkeydown = keyDown2;
-	stage.color = 0x888888;
-	var setStagePage = new bitmap( "stage.png" );
-	setStagePage.x = 200;
-	setStagePage.y = 240;
-	stage.addChild( setStagePage );
-	stageNumber = new NumberClip();
-	stageNumber.x = 310;
-	stageNumber.y = 242;
-	stage.addChild( stageNumber );
-	stageNumber.show( currentStage );
+	this.bg.graphics.clear();
+	this.bg.graphics.beginFill(0x888888);
+	this.bg.graphics.drawRect( 0, 0, 550, 550 );
+	this.layer1.addChild( this.bg );
+	this.setStagePage = new Bitmap( new BitmapData( Assets.assets().assets, new Rectangle( 64, 48, 80, 32 ) ) );
+	this.setStagePage.x = 200;
+	this.setStagePage.y = 240;
+	this.layer1.addChild( this.setStagePage );
+	this.currentStage = 1;
+
+	this.stageNumber = new NumberClip();
+
+	this.stageNumber.x = 310;
+	this.stageNumber.y = 242;
+	this.layer1.addChild( this.stageNumber );
+	this.stageNumber.number = this.currentStage;
+
+	document.onkeydown = this.keyDown2.bind(this);
 }
-
-function keyDown2(e){
-	var keycode = e.which;
+bond.prototype.keyDown2 = function(e){
+	var keycode = e.keyCode;
 	if( keycode == 87 || keycode == 38 ){
-		if( currentStage > 1 )stageNumber.show( --currentStage );
+		if( this.currentStage < 99 )this.stageNumber.number = ++this.currentStage;
 	}
 	else if( keycode == 83 || keycode == 40 ){
-		if( currentStage < 9 )stageNumber.show( ++currentStage );
+		if( this.currentStage > 1 )this.stageNumber.number = --this.currentStage;
 	}
-	else if( keycode == 32 || keycode == 13 )beginGameStage();
+	else if( keycode == 32 || keycode == 13 )this.beginGameStage();
 }
-
-function beginGameStage(){
+bond.prototype.beginGameStage = function(){
 	stagePlayMusic( "Sound1.mp3" );
 	stage.removeChildren();
 	createMapAndPlay();

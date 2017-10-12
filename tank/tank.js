@@ -130,15 +130,39 @@ function MoveItem( picUrl ){
 	//	}
 	//}
 }
+MoveItem.extend( TextureMovieClip );
 
 function NumberClip(){
-	this.tamp = MovieClip;	this.tamp( "numBlack-1.png" ); delete this.tamp;
-	this.setViewRectangle( 14, 14 );
-	this.setPlayMode( 10, 14, 0, 0 );
-	this.show = function( frameId ){
-		this.gotoAndStop( frameId + 1 );
+	Sprite.call(this);
+	Object.defineProperty( this, "number", {
+		set: function( num ){
+			this.returnChars();
+			if( Math.floor( num )!== num )throw new Error( "你TMD传个整型数字给我好不" );
+			var numChars = num.toString();
+			this.chars = [];
+			for( var i = 0; i < numChars.length; i++ ){
+				this.chars[i] = NumberClip.getNumber( numChars[i] );
+				this.chars[i].x = i * 14;
+				this.chars[i].num = numChars[i];
+				this.addChild( this.chars[i] );
+			}
+		}
+	});
+}
+NumberClip.extend( Sprite );
+NumberClip.prototype.returnChars = function(){
+	this.removeChildren();
+	while( this.chars && this.chars.length ){
+		var char = this.chars.pop();
+		NumberClip.numberPool[char.num].push(char);
 	}
 }
+NumberClip.getNumber = function( num ){
+	if(!NumberClip.numberPool[num])NumberClip.numberPool[num]=[];
+	if(!NumberClip.numberPool[num].length)return new Bitmap( new BitmapData( Assets.assets().assets, new Rectangle( 144 + num*14, 34,13,14)));
+	return NumberClip.numberPool[num].pop();
+}
+NumberClip.numberPool = [];
 
 function Bullet( state, level ){
 	this.tamp = MoveItem;	this.tamp( "bullet.png" ); delete this.tamp;
